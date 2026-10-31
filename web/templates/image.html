@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{{.Metadata.Title}}</title>
+	</head>
+	<body>
+        <header>
+            <nav>
+                <a href="/">
+                    image
+                </a>
+                <h1>{{ .Metadata.Title }}</h1>
+            </nav>
+        </header>
+        <main>
+            <div id="recueil-switch">
+                {{ if .PreviousMetadata }}<a href="{{.PreviousMetadata.Destination.HtmlPath.PublicValue}}">Previous</a>{{end}}
+                {{ if .NextMetadata }}<a href="{{.NextMetadata.Destination.HtmlPath.PublicValue}}">Next</a>{{end}}
+            </div>
+            <figure>
+                <a id="{{ .Metadata.Title }}" href="{{ .Metadata.Destination.Path.PublicValue }}">
+                    <img id="{{ .Metadata.Title }}" title=" {{ .Metadata.Description }}" alt=" {{ .Metadata.Description }}" src="{{ .Metadata.Destination.Path.PublicValue }}" loading="lazy">
+                </a>
+                <b>{{.Metadata.Date}}</b>
+                <figcaption>
+                    {{.Metadata.Description}}
+                </figcaption>
+            </figure>
+        </main>
+        <footer>
+            footer
+        </footer>
+    </body>
+</html>

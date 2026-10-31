@@ -29,6 +29,7 @@
             packages = with pkgs; [
               go
               golangci-lint
+              http-server
             ];
           };
         };

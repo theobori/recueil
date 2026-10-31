@@ -34,3 +34,6 @@ go.work.sum
 result
 .direnv
 /recueil
+example
+recueil-static
+example.yaml
