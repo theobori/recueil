@@ -4,9 +4,12 @@ import (
 	"github.com/theobori/recueil/image"
 )
 
-type HomeData struct {
+type HomeHtmlData struct {
 	Metadatas     image.Metadatas
 	Tags          []string
 	Title         string
 	TagsDirectory string
+}
+
+type HomeCssData struct {
 }

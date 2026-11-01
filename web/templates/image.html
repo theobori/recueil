@@ -3,33 +3,37 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>{{.Metadata.Title}}</title>
+        <link rel="stylesheet" type="text/css" href="/image.css">
 	</head>
 	<body>
         <header>
             <nav>
-                <a href="/">
-                    image
-                </a>
                 <h1>{{ .Metadata.Title }}</h1>
             </nav>
         </header>
         <main>
             <div id="recueil-switch">
-                {{ if .PreviousMetadata }}<a href="{{.PreviousMetadata.Destination.HtmlPath.PublicValue}}">Previous</a>{{end}}
-                {{ if .NextMetadata }}<a href="{{.NextMetadata.Destination.HtmlPath.PublicValue}}">Next</a>{{end}}
+                {{ if .PreviousMetadata }}<a id="recueil-switch-previous" href="{{.PreviousMetadata.Destination.HtmlPath.PublicValue}}">Previous</a>{{end}}
+                {{ if .NextMetadata }}<a id="recueil-switch-next" href="{{.NextMetadata.Destination.HtmlPath.PublicValue}}">Next</a>{{end}}
             </div>
             <figure>
                 <a id="{{ .Metadata.Title }}" href="{{ .Metadata.Destination.Path.PublicValue }}">
                     <img id="{{ .Metadata.Title }}" title=" {{ .Metadata.Description }}" alt=" {{ .Metadata.Description }}" src="{{ .Metadata.Destination.Path.PublicValue }}" loading="lazy">
                 </a>
-                <b>{{.Metadata.Date}}</b>
-                <figcaption>
-                    {{.Metadata.Description}}
-                </figcaption>
+                <div id="recueil-figure-metadata">
+                    <div>
+                        <b>{{.Metadata.Date.Format "2006-01-02 15:04:05"}}</b>
+                    </div>
+                    <figcaption>
+                        {{.Metadata.Description}}
+                    </figcaption>
+                </div>
             </figure>
         </main>
         <footer>
-            footer
+            <a href="#">top</a>
+            <a href="/">home</a>
+            <a href="/feed.xml">rss</a>
         </footer>
     </body>
 </html>

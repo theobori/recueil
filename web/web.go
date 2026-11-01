@@ -3,6 +3,7 @@ package web
 import (
 	"embed"
 	"path/filepath"
+	"sort"
 
 	"github.com/theobori/recueil/configuration"
 	"github.com/theobori/recueil/image"
@@ -24,27 +25,33 @@ func Execute(destinationDirectory string, metadatas image.Metadatas, config *con
 		i++
 	}
 
-	homeData := HomeData{
+	sort.Strings(tags)
+
+	homeHtmlData := HomeHtmlData{
 		Metadatas:     metadatas,
 		Title:         config.Title,
 		Tags:          tags,
 		TagsDirectory: config.TagsDirectory,
 	}
-	err = ExecuteHelper(templates, filepath.Join(destinationDirectory, "index.html"), &homeData, "templates/home.html")
+	err = ExecuteHelper(templates, filepath.Join(destinationDirectory, "index.html"), &homeHtmlData, "templates/home.html")
+	if err != nil {
+		return err
+	}
+	homeCssData := HomeCssData{}
+	err = ExecuteHelper(templates, filepath.Join(destinationDirectory, "home.css"), &homeCssData, "templates/home.css")
 	if err != nil {
 		return err
 	}
 
 	for tagName, boundMetadatas := range byTags {
-		tagData := TagData{
+		tagHtmlData := TagHtmlData{
 			Metadatas:     boundMetadatas,
 			Title:         tagName,
 			Tags:          tags,
-			TagName:       tagName,
 			TagsDirectory: config.TagsDirectory,
 		}
 
-		err = ExecuteHelper(templates, filepath.Join(destinationDirectory, config.TagsDirectory, tagName+".html"), &tagData, "templates/tag.html")
+		err = ExecuteHelper(templates, filepath.Join(destinationDirectory, config.TagsDirectory, tagName+".html"), &tagHtmlData, "templates/home.html")
 		if err != nil {
 			return err
 		}
@@ -54,18 +61,24 @@ func Execute(destinationDirectory string, metadatas image.Metadatas, config *con
 	var previousMetadata *image.Metadata
 	var nextMetadata *image.Metadata
 
+	imageCssData := ImageCssData{}
+	err = ExecuteHelper(templates, filepath.Join(destinationDirectory, "image.css"), &imageCssData, "templates/image.css")
+	if err != nil {
+		return err
+	}
+
 	for i := 0; i < len(metadatas)-1; i++ {
 		metadata := metadatas[i]
 		nextMetadata = metadatas[i+1]
 
-		imageData := ImageData{
+		imageHtmlData := ImageHtmlData{
 			Metadata:         metadata,
 			TagsDirectory:    config.TagsDirectory,
 			PreviousMetadata: previousMetadata,
 			NextMetadata:     nextMetadata,
 		}
 
-		err = ExecuteHelper(templates, metadata.Destination.HtmlPath.Value, &imageData, "templates/image.html")
+		err = ExecuteHelper(templates, metadata.Destination.HtmlPath.Value, &imageHtmlData, "templates/image.html")
 		if err != nil {
 			return err
 		}
