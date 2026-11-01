@@ -37,7 +37,12 @@ func Execute(destinationDirectory string, metadatas image.Metadatas, config *con
 	if err != nil {
 		return err
 	}
-	homeCssData := HomeCssData{}
+	homeCssData := HomeCssData{
+		ColorBg:    config.Css.ColorBg,
+		ColorFg:    config.Css.ColorFg,
+		ColorLink:  config.Css.ColorLink,
+		ColorHover: config.Css.ColorHover,
+	}
 	err = ExecuteHelper(templates, filepath.Join(destinationDirectory, "home.css"), &homeCssData, "templates/home.css")
 	if err != nil {
 		return err
@@ -61,7 +66,12 @@ func Execute(destinationDirectory string, metadatas image.Metadatas, config *con
 	var previousMetadata *image.Metadata
 	var nextMetadata *image.Metadata
 
-	imageCssData := ImageCssData{}
+	imageCssData := ImageCssData{
+		ColorBg:    config.Css.ColorBg,
+		ColorFg:    config.Css.ColorFg,
+		ColorLink:  config.Css.ColorLink,
+		ColorHover: config.Css.ColorHover,
+	}
 	err = ExecuteHelper(templates, filepath.Join(destinationDirectory, "image.css"), &imageCssData, "templates/image.css")
 	if err != nil {
 		return err

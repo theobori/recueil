@@ -1,8 +1,8 @@
 :root {
-  --color-bg: #fffef7;
-  --color-fg: #394655;
-  --color-link: brown;
-  --color-hover: brown;
+  --color-bg: {{ .ColorBg }};
+  --color-fg: {{ .ColorFg }};
+  --color-link: {{ .ColorLink }};
+  --color-hover: {{ .ColorHover }};
 }
 
 body {

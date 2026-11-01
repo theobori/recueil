@@ -17,13 +17,13 @@ func NewMetadata(directoryPath string, publicDirectoryPath string, filePath stri
 	publicFilePath := filepath.Join(publicDirectoryPath, base)
 	ext := filepath.Ext(publicFilePath)
 	publicThumbnailPath := strings.TrimSuffix(publicFilePath, ext) + ".thumbnail.jpeg"
-	HtmlPath := strings.TrimSuffix(publicFilePath, ext) + ".html"
+	htmlPath := strings.TrimSuffix(publicFilePath, ext) + ".html"
 
 	return &Metadata{
 		DirectoryPath: NewPath(directoryPath, publicDirectoryPath),
 		Path:          NewPath(directoryPath, publicFilePath),
 		ThumbnailPath: NewPath(directoryPath, publicThumbnailPath),
-		HtmlPath:      NewPath(directoryPath, HtmlPath),
+		HtmlPath:      NewPath(directoryPath, htmlPath),
 	}
 }
 

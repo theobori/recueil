@@ -12,4 +12,8 @@ type ImageHtmlData struct {
 }
 
 type ImageCssData struct {
+	ColorBg    string
+	ColorFg    string
+	ColorLink  string
+	ColorHover string
 }

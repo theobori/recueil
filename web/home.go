@@ -12,4 +12,8 @@ type HomeHtmlData struct {
 }
 
 type HomeCssData struct {
+	ColorBg    string
+	ColorFg    string
+	ColorLink  string
+	ColorHover string
 }
