@@ -37,7 +37,6 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-
 	baseDestinationDirectory := filepath.Join(destinationDirectory, config.BaseDirectory)
 	err = os.MkdirAll(baseDestinationDirectory, 0o755)
 	if err != nil {
@@ -61,13 +60,17 @@ func main() {
 		if err != nil {
 			log.Fatalln(err)
 		}
-		err = image.CreateThumbnail(metadata.Source.Path, metadata.Destination.ThumbnailPath.Value, 256, 256)
+		err = image.CreateThumbnail(metadata.Source.Path, metadata.Destination.ThumbnailPath.Value, config.ThumbnailPixelSize)
 		if err != nil {
 			log.Fatalln(err)
 		}
 	}
 
-	// ^ fonction execute
+	err = internal.CopyDir(destinationDirectory, config.PublicSourceDirectory)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
 	err = web.Execute(destinationDirectory, metadatas, config)
 	if err != nil {
 		log.Fatalln(err)

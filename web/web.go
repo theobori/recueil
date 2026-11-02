@@ -62,22 +62,12 @@ func Execute(destinationDirectory string, metadatas image.Metadatas, config *con
 		}
 	}
 
+	n = len(metadatas)
 	metadatas = append(metadatas, nil)
 	var previousMetadata *image.Metadata
 	var nextMetadata *image.Metadata
 
-	imageCssData := ImageCssData{
-		ColorBg:    config.Css.ColorBg,
-		ColorFg:    config.Css.ColorFg,
-		ColorLink:  config.Css.ColorLink,
-		ColorHover: config.Css.ColorHover,
-	}
-	err = ExecuteHelper(templates, filepath.Join(destinationDirectory, "image.css"), &imageCssData, "templates/image.css")
-	if err != nil {
-		return err
-	}
-
-	for i := 0; i < len(metadatas)-1; i++ {
+	for i := 0; i < n; i++ {
 		metadata := metadatas[i]
 		nextMetadata = metadatas[i+1]
 
@@ -94,6 +84,23 @@ func Execute(destinationDirectory string, metadatas image.Metadatas, config *con
 		}
 
 		previousMetadata = metadata
+	}
+	metadatas = metadatas[0:n]
+
+	imageCssData := ImageCssData{
+		ColorBg:    config.Css.ColorBg,
+		ColorFg:    config.Css.ColorFg,
+		ColorLink:  config.Css.ColorLink,
+		ColorHover: config.Css.ColorHover,
+	}
+	err = ExecuteHelper(templates, filepath.Join(destinationDirectory, "image.css"), &imageCssData, "templates/image.css")
+	if err != nil {
+		return err
+	}
+
+	err = ExecuteRss(metadatas, filepath.Join(destinationDirectory, "rss.xml"), config.Title, config.SiteUrl)
+	if err != nil {
+		return err
 	}
 
 	return nil

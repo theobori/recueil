@@ -19,12 +19,9 @@ type SubImager interface {
 	SubImage(r image.Rectangle) image.Image
 }
 
-func CreateThumbnail(imagePath string, thumbnailPath string, width int, height int) error {
-	if width <= 0 {
+func CreateThumbnail(imagePath string, thumbnailPath string, thumbnailSize int) error {
+	if thumbnailSize <= 0 {
 		return fmt.Errorf("The width must be greater than zero.")
-	}
-	if height <= 0 {
-		return fmt.Errorf("The height must be greater than zero.")
 	}
 
 	f, err := os.Open(imagePath)
@@ -53,7 +50,7 @@ func CreateThumbnail(imagePath string, thumbnailPath string, width int, height i
 	}
 	defer fw.Close()
 
-	imgDestination := image.NewRGBA(image.Rect(0, 0, width, height))
+	imgDestination := image.NewRGBA(image.Rect(0, 0, thumbnailSize, thumbnailSize))
 
 	draw.NearestNeighbor.Scale(imgDestination, imgDestination.Rect, imgSquare, imgSquare.Bounds(), draw.Over, nil)
 

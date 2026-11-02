@@ -11,10 +11,15 @@ type Css struct {
 
 type Configuration struct {
 	// This value define the destination directory within the base destination directory
-	BaseDirectory string `yaml:"baseDirectory"`
-	TagsDirectory string `yaml:"tagsDirectory"`
-	Title         string `yaml:"title"`
-	Css           Css    `yaml:"css"`
+	BaseDirectory         string `yaml:"baseDirectory"`
+	TagsDirectory         string `yaml:"tagsDirectory"`
+	Title                 string `yaml:"title"`
+	Description           string `yaml:"description"`
+	SiteUrl               string `yaml:"siteUrl"`
+	Css                   Css    `yaml:"css"`
+	PublicSourceDirectory string `yaml:"publicSourceDirectory"`
+	ImageMaxPixelSize     int    `yaml:"imageMaxPixelSize"`
+	ThumbnailPixelSize    int    `yaml:"thumbnailPixelSize"`
 }
 
 func NewConfigurationDefault() *Configuration {
@@ -28,6 +33,10 @@ func NewConfigurationDefault() *Configuration {
 			ColorLink:  "brown",
 			ColorHover: "brown",
 		},
+		SiteUrl:               "http://localhost:8080",
+		PublicSourceDirectory: "./public",
+		ImageMaxPixelSize:     960,
+		ThumbnailPixelSize:    256,
 	}
 }
 
