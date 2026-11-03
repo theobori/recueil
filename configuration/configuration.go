@@ -20,6 +20,7 @@ type Configuration struct {
 	PublicSourceDirectory string `yaml:"publicSourceDirectory"`
 	ImageMaxPixelSize     int    `yaml:"imageMaxPixelSize"`
 	ThumbnailPixelSize    int    `yaml:"thumbnailPixelSize"`
+	WebringUrl            string `yaml:"webringUrl"`
 }
 
 func NewConfigurationDefault() *Configuration {
@@ -37,6 +38,7 @@ func NewConfigurationDefault() *Configuration {
 		PublicSourceDirectory: "./public",
 		ImageMaxPixelSize:     960,
 		ThumbnailPixelSize:    256,
+		WebringUrl:            "",
 	}
 }
 

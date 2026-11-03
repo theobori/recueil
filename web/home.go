@@ -9,6 +9,7 @@ type HomeHtmlData struct {
 	Tags          []string
 	Title         string
 	TagsDirectory string
+	WebringUrl    string
 }
 
 type HomeCssData struct {

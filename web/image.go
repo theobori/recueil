@@ -9,6 +9,7 @@ type ImageHtmlData struct {
 	PreviousMetadata *image.Metadata
 	NextMetadata     *image.Metadata
 	TagsDirectory    string
+	WebringUrl       string
 }
 
 type ImageCssData struct {

@@ -2,6 +2,7 @@ package web
 
 import (
 	"embed"
+	"log"
 	"path/filepath"
 	"sort"
 
@@ -32,6 +33,7 @@ func Execute(destinationDirectory string, metadatas image.Metadatas, config *con
 		Title:         config.Title,
 		Tags:          tags,
 		TagsDirectory: config.TagsDirectory,
+		WebringUrl:    config.WebringUrl,
 	}
 	err = ExecuteHelper(templates, filepath.Join(destinationDirectory, "index.html"), &homeHtmlData, verbose, "templates/home.html")
 	if err != nil {
@@ -76,6 +78,7 @@ func Execute(destinationDirectory string, metadatas image.Metadatas, config *con
 			TagsDirectory:    config.TagsDirectory,
 			PreviousMetadata: previousMetadata,
 			NextMetadata:     nextMetadata,
+			WebringUrl:       config.WebringUrl,
 		}
 
 		err = ExecuteHelper(templates, metadata.Destination.HtmlPath.Value, &imageHtmlData, verbose, "templates/image.html")
@@ -98,7 +101,9 @@ func Execute(destinationDirectory string, metadatas image.Metadatas, config *con
 		return err
 	}
 
-	err = ExecuteRss(metadatas, filepath.Join(destinationDirectory, "rss.xml"), config.Title, config.SiteUrl)
+	destinationPath := filepath.Join(destinationDirectory, "rss.xml")
+	log.Printf("Evaluating template and writing to '%s'\n", destinationPath)
+	err = ExecuteRss(metadatas, destinationPath, config.Title, config.SiteUrl)
 	if err != nil {
 		return err
 	}

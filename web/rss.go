@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/theobori/recueil/image"
 	"github.com/theobori/recueil/internal"
@@ -33,7 +34,7 @@ func CreateRss(metadatas image.Metadatas, title string, siteUrl string) string {
 			internal.UrlJoin(siteUrl, metadata.Destination.ThumbnailPath.PublicValue),
 			metadata.Description(),
 		)
-		fmt.Fprintf(&b, "<pubDate>%s</pubDate>", metadata.Date())
+		fmt.Fprintf(&b, "<pubDate>%s</pubDate>", metadata.Date().UTC().Format(time.RFC1123Z))
 		b.WriteString("</item>")
 	}
 
