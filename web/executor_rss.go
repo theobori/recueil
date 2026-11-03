@@ -2,7 +2,9 @@ package web
 
 import (
 	"fmt"
+	"log"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -53,6 +55,19 @@ func ExecuteRss(metadatas image.Metadatas, destinationPath string, title string,
 	}
 
 	_, err = f.WriteString(feedString)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (e *Executor) executeRss() error {
+	destinationPath := filepath.Join(e.destinationDirectory, "rss.xml")
+	if e.verbose {
+		log.Printf("Evaluating template and writing to '%s'\n", destinationPath)
+	}
+	err := ExecuteRss(e.metadatas, destinationPath, e.config.Title, e.config.SiteUrl)
 	if err != nil {
 		return err
 	}

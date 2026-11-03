@@ -9,6 +9,10 @@ type Css struct {
 	ColorHover string `yaml:"colorHover"`
 }
 
+type Images struct {
+
+}
+
 type Configuration struct {
 	// This value define the destination directory within the base destination directory
 	BaseDirectory         string `yaml:"baseDirectory"`

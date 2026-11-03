@@ -13,10 +13,10 @@ type Path struct {
 	PublicValue string
 }
 
-func NewPath(directoryPath string, value string) *Path {
+func NewPath(directoryPath string, path string) *Path {
 	return &Path{
-		Value:       filepath.Join(directoryPath, value),
-		PublicValue: value,
+		Value:       filepath.Join(directoryPath, path),
+		PublicValue: path,
 	}
 }
 

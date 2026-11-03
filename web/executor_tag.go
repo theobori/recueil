@@ -1,0 +1,34 @@
+package web
+
+import (
+	"path/filepath"
+
+	"github.com/theobori/recueil/image"
+)
+
+type TagHtmlData HomeHtmlData
+
+func (e *Executor) executeTag(tagName string, boundMetadatas []*image.Metadata) error {
+	return e.executeHelper(
+		filepath.Join(e.config.TagsDirectory, tagName+".html"),
+		&TagHtmlData{
+			Metadatas:     boundMetadatas,
+			Title:         tagName,
+			Tags:          e.tags,
+			TagsDirectory: e.config.TagsDirectory,
+			WebringUrl:    e.config.WebringUrl,
+		},
+		"templates/home.html",
+	)
+}
+
+func (e *Executor) executeTags() error {
+	for tagName, boundMetadatas := range e.byTags {
+		err := e.executeTag(tagName, boundMetadatas)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}

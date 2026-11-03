@@ -89,7 +89,8 @@ func main() {
 	}
 
 	log.Printf("Evaluating then creating the web files.\n")
-	err = web.Execute(destinationDirectory, metadatas, config, verbose)
+	webExecutor := web.NewExecutor(destinationDirectory, metadatas, config, verbose)
+	err = webExecutor.Execute()
 	if err != nil {
 		log.Fatalln(err)
 	}
