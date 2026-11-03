@@ -12,7 +12,7 @@ import (
 //go:embed templates
 var templates embed.FS
 
-func Execute(destinationDirectory string, metadatas image.Metadatas, config *configuration.Configuration) error {
+func Execute(destinationDirectory string, metadatas image.Metadatas, config *configuration.Configuration, verbose bool) error {
 	var err error
 
 	byTags := metadatas.ByTags()
@@ -33,7 +33,7 @@ func Execute(destinationDirectory string, metadatas image.Metadatas, config *con
 		Tags:          tags,
 		TagsDirectory: config.TagsDirectory,
 	}
-	err = ExecuteHelper(templates, filepath.Join(destinationDirectory, "index.html"), &homeHtmlData, "templates/home.html")
+	err = ExecuteHelper(templates, filepath.Join(destinationDirectory, "index.html"), &homeHtmlData, verbose, "templates/home.html")
 	if err != nil {
 		return err
 	}
@@ -43,7 +43,7 @@ func Execute(destinationDirectory string, metadatas image.Metadatas, config *con
 		ColorLink:  config.Css.ColorLink,
 		ColorHover: config.Css.ColorHover,
 	}
-	err = ExecuteHelper(templates, filepath.Join(destinationDirectory, "home.css"), &homeCssData, "templates/home.css")
+	err = ExecuteHelper(templates, filepath.Join(destinationDirectory, "home.css"), &homeCssData, verbose, "templates/home.css")
 	if err != nil {
 		return err
 	}
@@ -56,7 +56,7 @@ func Execute(destinationDirectory string, metadatas image.Metadatas, config *con
 			TagsDirectory: config.TagsDirectory,
 		}
 
-		err = ExecuteHelper(templates, filepath.Join(destinationDirectory, config.TagsDirectory, tagName+".html"), &tagHtmlData, "templates/home.html")
+		err = ExecuteHelper(templates, filepath.Join(destinationDirectory, config.TagsDirectory, tagName+".html"), &tagHtmlData, verbose, "templates/home.html")
 		if err != nil {
 			return err
 		}
@@ -78,7 +78,7 @@ func Execute(destinationDirectory string, metadatas image.Metadatas, config *con
 			NextMetadata:     nextMetadata,
 		}
 
-		err = ExecuteHelper(templates, metadata.Destination.HtmlPath.Value, &imageHtmlData, "templates/image.html")
+		err = ExecuteHelper(templates, metadata.Destination.HtmlPath.Value, &imageHtmlData, verbose, "templates/image.html")
 		if err != nil {
 			return err
 		}
@@ -93,7 +93,7 @@ func Execute(destinationDirectory string, metadatas image.Metadatas, config *con
 		ColorLink:  config.Css.ColorLink,
 		ColorHover: config.Css.ColorHover,
 	}
-	err = ExecuteHelper(templates, filepath.Join(destinationDirectory, "image.css"), &imageCssData, "templates/image.css")
+	err = ExecuteHelper(templates, filepath.Join(destinationDirectory, "image.css"), &imageCssData, verbose, "templates/image.css")
 	if err != nil {
 		return err
 	}

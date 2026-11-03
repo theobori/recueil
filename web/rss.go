@@ -9,7 +9,7 @@ import (
 	"github.com/theobori/recueil/internal"
 )
 
-func CreateRss(metadatas image.Metadatas, destinationPath string, title string, siteUrl string) string {
+func CreateRss(metadatas image.Metadatas, title string, siteUrl string) string {
 	b := strings.Builder{}
 
 	b.WriteString("<rss version=\"2.0\" xmlns:atom=\"http://www.w3.org/2005/Atom\">")
@@ -44,7 +44,7 @@ func CreateRss(metadatas image.Metadatas, destinationPath string, title string, 
 }
 
 func ExecuteRss(metadatas image.Metadatas, destinationPath string, title string, siteUrl string) error {
-	feedString := CreateRss(metadatas, destinationPath, title, siteUrl)
+	feedString := CreateRss(metadatas, title, siteUrl)
 
 	f, err := os.Create(destinationPath)
 	if err != nil {

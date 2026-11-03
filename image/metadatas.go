@@ -1,6 +1,7 @@
 package image
 
 import (
+	"log"
 	"os"
 	"path/filepath"
 
@@ -11,7 +12,7 @@ import (
 
 type Metadatas []*Metadata
 
-func NewMetadatasFromDirectory(sourceDirectoryPath string, destinationDirectoryPath string, publicDestinationDirectoryPath string) (Metadatas, error) {
+func NewMetadatasFromDirectory(sourceDirectoryPath string, destinationDirectoryPath string, publicDestinationDirectoryPath string, verbose bool) (Metadatas, error) {
 	entries, err := os.ReadDir(sourceDirectoryPath)
 	if err != nil {
 		return nil, err
@@ -26,13 +27,18 @@ func NewMetadatasFromDirectory(sourceDirectoryPath string, destinationDirectoryP
 		path := filepath.Join(sourceDirectoryPath, entry.Name())
 		isImage, err := validate.IsImageFromPath(path)
 		if err != nil {
-			// log ?
+			if verbose {
+				log.Println(err)
+			}
 			continue
 		}
 		if !isImage {
 			continue
 		}
 
+		if verbose {
+			log.Printf("Fetching source metadatas for the file '%s'.\n", path)
+		}
 		sourceMetadata, err := source.NewMetadataFromPath(path)
 		if err != nil {
 			return nil, err
