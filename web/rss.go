@@ -25,7 +25,7 @@ func CreateRss(metadatas image.Metadatas, title string, siteUrl string) string {
 		b.WriteString("<item>")
 		fmt.Fprintf(&b, "<title>%s</title>", metadata.Title())
 
-		metadataUrl := internal.UrlJoin(siteUrl, metadata.Destination.Path.PublicValue)
+		metadataUrl := internal.UrlJoin(siteUrl, metadata.Destination.ImagePath.PublicValue)
 		fmt.Fprintf(&b, "<link>%s</link>", metadataUrl)
 		fmt.Fprintf(
 			&b,

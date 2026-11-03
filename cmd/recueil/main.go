@@ -65,20 +65,24 @@ func main() {
 
 	log.Printf("Copying images and creating the associated thumbnails.\n")
 	for _, metadata := range metadatas {
-		log.Printf("Copying from '%s' to '%s'.\n", metadata.Source.Path, metadata.Destination.Path.Value)
-		err := internal.CopyFile(metadata.Source.Path, metadata.Destination.Path.Value)
+		if verbose {
+			log.Printf("Copying from '%s' to '%s'.\n", metadata.Source.ImagePath.Value, metadata.Destination.ImagePath.Value)
+		}
+		err := internal.CopyFile(metadata.Source.ImagePath.Value, metadata.Destination.ImagePath.Value)
 		if err != nil {
 			log.Fatalln(err)
 		}
 
-		log.Printf("Creating the thumbnail at '%s'.\n", metadata.Destination.ThumbnailPath.Value)
-		err = image.CreateThumbnail(metadata.Source.Path, metadata.Destination.ThumbnailPath.Value, config.ThumbnailPixelSize)
+		if verbose {
+			log.Printf("Creating the thumbnail at '%s'.\n", metadata.Destination.ThumbnailPath.Value)
+		}
+		err = image.CreateThumbnail(metadata.Source.ImagePath.Value, metadata.Destination.ThumbnailPath.Value, config.ThumbnailPixelSize)
 		if err != nil {
 			log.Fatalln(err)
 		}
 	}
 
-	log.Printf("Copying the files in '%s' into '%s'.\n", config.PublicSourceDirectory, destinationDirectory)
+	log.Printf("Copying the files from '%s' into '%s'.\n", config.PublicSourceDirectory, destinationDirectory)
 	err = internal.CopyDir(destinationDirectory, config.PublicSourceDirectory)
 	if err != nil {
 		log.Fatalln(err)

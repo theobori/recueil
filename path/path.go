@@ -1,11 +1,13 @@
-package destination
+package path
 
 import (
 	"path/filepath"
 )
 
 type Path struct {
-	// Relative from where the process is executed or absolute path
+	// Relative from where the process is execute
+	// or
+	// an absolute path
 	Value string
 	// Relative from where it will be available publicly
 	PublicValue string

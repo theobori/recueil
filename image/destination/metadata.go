@@ -3,33 +3,36 @@ package destination
 import (
 	"path/filepath"
 	"strings"
+
+	"github.com/theobori/recueil/path"
 )
 
 type Metadata struct {
-	DirectoryPath *Path
-	Path          *Path
-	ThumbnailPath *Path
-	HtmlPath      *Path
+	DirectoryPath *path.Path
+	ImagePath     *path.Path
+	ThumbnailPath *path.Path
+	HtmlPath      *path.Path
 }
 
 func NewMetadata(directoryPath string, publicDirectoryPath string, filePath string) *Metadata {
 	base := filepath.Base(filePath)
 	publicFilePath := filepath.Join(publicDirectoryPath, base)
 	ext := filepath.Ext(publicFilePath)
-	publicThumbnailPath := strings.TrimSuffix(publicFilePath, ext) + ".thumbnail.jpeg"
-	htmlPath := strings.TrimSuffix(publicFilePath, ext) + ".html"
+	publicFilePathWithoutExt := strings.TrimSuffix(publicFilePath, ext)
+	publicThumbnailPath := publicFilePathWithoutExt + ".thumbnail.jpeg"
+	htmlPath := publicFilePathWithoutExt + ".html"
 
 	return &Metadata{
-		DirectoryPath: NewPath(directoryPath, publicDirectoryPath),
-		Path:          NewPath(directoryPath, publicFilePath),
-		ThumbnailPath: NewPath(directoryPath, publicThumbnailPath),
-		HtmlPath:      NewPath(directoryPath, htmlPath),
+		DirectoryPath: path.NewPath(directoryPath, publicDirectoryPath),
+		ImagePath:     path.NewPath(directoryPath, publicFilePath),
+		ThumbnailPath: path.NewPath(directoryPath, publicThumbnailPath),
+		HtmlPath:      path.NewPath(directoryPath, htmlPath),
 	}
 }
 
 func (m *Metadata) SetDirectory(directoryPath string) {
 	m.DirectoryPath.SetDirectory(directoryPath)
-	m.Path.SetDirectory(directoryPath)
+	m.ImagePath.SetDirectory(directoryPath)
 	m.ThumbnailPath.SetDirectory(directoryPath)
 	m.HtmlPath.SetDirectory(directoryPath)
 }

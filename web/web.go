@@ -56,6 +56,7 @@ func Execute(destinationDirectory string, metadatas image.Metadatas, config *con
 			Title:         tagName,
 			Tags:          tags,
 			TagsDirectory: config.TagsDirectory,
+			WebringUrl:    config.WebringUrl,
 		}
 
 		err = ExecuteHelper(templates, filepath.Join(destinationDirectory, config.TagsDirectory, tagName+".html"), &tagHtmlData, verbose, "templates/home.html")
@@ -102,7 +103,9 @@ func Execute(destinationDirectory string, metadatas image.Metadatas, config *con
 	}
 
 	destinationPath := filepath.Join(destinationDirectory, "rss.xml")
-	log.Printf("Evaluating template and writing to '%s'\n", destinationPath)
+	if verbose {
+		log.Printf("Evaluating template and writing to '%s'\n", destinationPath)
+	}
 	err = ExecuteRss(metadatas, destinationPath, config.Title, config.SiteUrl)
 	if err != nil {
 		return err

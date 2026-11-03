@@ -17,8 +17,8 @@
                 {{ if .NextMetadata }}<a id="recueil-switch-next" href="{{.NextMetadata.Destination.HtmlPath.PublicValue}}">Next</a>{{end}}
             </div>
             <figure>
-                <a id="{{ .Metadata.Title }}" href="{{ .Metadata.Destination.Path.PublicValue }}">
-                    <img id="{{ .Metadata.Title }}" title=" {{ .Metadata.Description }}" alt=" {{ .Metadata.Description }}" src="{{ .Metadata.Destination.Path.PublicValue }}" loading="lazy">
+                <a id="{{ .Metadata.Title }}" href="{{ .Metadata.Destination.ImagePath.PublicValue }}">
+                    <img id="{{ .Metadata.Title }}" title=" {{ .Metadata.Description }}" alt=" {{ .Metadata.Description }}" src="{{ .Metadata.Destination.ImagePath.PublicValue }}" loading="lazy">
                 </a>
                 <div id="recueil-figure-metadata">
                     <div>

@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/theobori/recueil/internal"
+	rpath "github.com/theobori/recueil/path"
 )
 
 type Metadata struct {
@@ -14,7 +15,7 @@ type Metadata struct {
 	Description string   `yaml:"description"`
 	Tags        []string `yaml:"tags"`
 	Date        time.Time
-	Path        string
+	ImagePath   *rpath.Path
 }
 
 func NewMetadataFromPath(path string) (*Metadata, error) {
@@ -24,8 +25,8 @@ func NewMetadataFromPath(path string) (*Metadata, error) {
 	}
 
 	metadata := Metadata{
-		Date: fileInfo.ModTime(),
-		Path: path,
+		Date:      fileInfo.ModTime(),
+		ImagePath: rpath.NewPath("", path),
 	}
 
 	yamlPath := strings.TrimSuffix(path, ".") + ".yaml"
@@ -36,7 +37,7 @@ func NewMetadataFromPath(path string) (*Metadata, error) {
 	}
 
 	if metadata.Title == "" {
-		metadata.Title = filepath.Base(metadata.Path)
+		metadata.Title = filepath.Base(metadata.ImagePath.Value)
 	}
 
 	return &metadata, nil
