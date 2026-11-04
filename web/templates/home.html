@@ -18,7 +18,7 @@
             </div>
             <div id="recueil-thumbnails">{{range .Metadatas}}
                 <a id="{{ .Title }}" href="{{ .Destination.HtmlPath.PublicValue }}">
-                    <img id="{{ .Title }}" title=" {{ .Description }}" alt=" {{ .Description }}" src="{{ .Destination.ThumbnailPath.PublicValue }}" loading="lazy">
+                    <img id="{{ .Title }}" class="recueil-thumbnail" title=" {{ .Description }}" alt=" {{ .Description }}" src="{{ .Destination.ThumbnailPath.PublicValue }}" loading="lazy">
                 </a>{{else}}
                 <div><i>The recueil is empty.</i></div>{{end}}
             </div>
@@ -31,3 +31,4 @@
         </footer>
     </body>
 </html>
+

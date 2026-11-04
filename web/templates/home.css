@@ -47,6 +47,13 @@ a:hover {
         padding: .1em;
     }
 }
+.recueil-thumbnail {
+    width: 100%;
+    max-width: {{ .ThumbnailPixelSize }}px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center; 
+}
 
 #recueil-thumbnails {
 	margin:1em 0 0 -.2em;

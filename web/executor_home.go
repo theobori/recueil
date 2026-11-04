@@ -13,10 +13,11 @@ type HomeHtmlData struct {
 }
 
 type HomeCssData struct {
-	ColorBg    string
-	ColorFg    string
-	ColorLink  string
-	ColorHover string
+	ColorBg            string
+	ColorFg            string
+	ColorLink          string
+	ColorHover         string
+	ThumbnailPixelSize int
 }
 
 func (e *Executor) executeHome() error {
@@ -37,10 +38,11 @@ func (e *Executor) executeHome() error {
 	err = e.executeHelper(
 		"home.css",
 		&HomeCssData{
-			ColorBg:    e.config.Css.ColorBg,
-			ColorFg:    e.config.Css.ColorFg,
-			ColorLink:  e.config.Css.ColorLink,
-			ColorHover: e.config.Css.ColorHover,
+			ColorBg:            e.config.Css.ColorBg,
+			ColorFg:            e.config.Css.ColorFg,
+			ColorLink:          e.config.Css.ColorLink,
+			ColorHover:         e.config.Css.ColorHover,
+			ThumbnailPixelSize: e.config.Images.ThumbnailPixelSize,
 		},
 		"templates/home.css",
 	)
