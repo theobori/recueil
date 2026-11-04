@@ -76,7 +76,7 @@ func main() {
 		if verbose {
 			log.Printf("Creating the thumbnail at '%s'.\n", metadata.Destination.ThumbnailPath.Value)
 		}
-		err = image.CreateThumbnail(metadata.Source.ImagePath.Value, metadata.Destination.ThumbnailPath.Value, config.ThumbnailPixelSize)
+		err = image.CreateThumbnail(metadata.Source.ImagePath.Value, metadata.Destination.ThumbnailPath.Value, config.Images.ThumbnailPixelSize)
 		if err != nil {
 			log.Fatalln(err)
 		}

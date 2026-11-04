@@ -2,29 +2,30 @@ package configuration
 
 import "github.com/theobori/recueil/internal"
 
-type Css struct {
+type ConfigurationCss struct {
 	ColorBg    string `yaml:"colorBg"`
 	ColorFg    string `yaml:"colorFg"`
 	ColorLink  string `yaml:"colorLink"`
 	ColorHover string `yaml:"colorHover"`
 }
 
-type Images struct {
-
+type ConfigurationImages struct {
+	AutoResize         bool `yaml:"autoResize"`
+	MaxPixelSize       int  `yaml:"maxPixelSize"`
+	ThumbnailPixelSize int  `yaml:"thumbnailPixelSize"`
 }
 
 type Configuration struct {
 	// This value define the destination directory within the base destination directory
-	BaseDirectory         string `yaml:"baseDirectory"`
-	TagsDirectory         string `yaml:"tagsDirectory"`
-	Title                 string `yaml:"title"`
-	Description           string `yaml:"description"`
-	SiteUrl               string `yaml:"siteUrl"`
-	Css                   Css    `yaml:"css"`
-	PublicSourceDirectory string `yaml:"publicSourceDirectory"`
-	ImageMaxPixelSize     int    `yaml:"imageMaxPixelSize"`
-	ThumbnailPixelSize    int    `yaml:"thumbnailPixelSize"`
-	WebringUrl            string `yaml:"webringUrl"`
+	BaseDirectory         string              `yaml:"baseDirectory"`
+	TagsDirectory         string              `yaml:"tagsDirectory"`
+	Title                 string              `yaml:"title"`
+	Description           string              `yaml:"description"`
+	SiteUrl               string              `yaml:"siteUrl"`
+	Css                   ConfigurationCss    `yaml:"css"`
+	PublicSourceDirectory string              `yaml:"publicSourceDirectory"`
+	WebringUrl            string              `yaml:"webringUrl"`
+	Images                ConfigurationImages `yaml:"images"`
 }
 
 func NewConfigurationDefault() *Configuration {
@@ -32,7 +33,7 @@ func NewConfigurationDefault() *Configuration {
 		BaseDirectory: "/recueil",
 		TagsDirectory: "/tags",
 		Title:         "recueil",
-		Css: Css{
+		Css: ConfigurationCss{
 			ColorBg:    "#fffef7",
 			ColorFg:    "#394655",
 			ColorLink:  "brown",
@@ -40,9 +41,12 @@ func NewConfigurationDefault() *Configuration {
 		},
 		SiteUrl:               "http://localhost:8080",
 		PublicSourceDirectory: "./public",
-		ImageMaxPixelSize:     960,
-		ThumbnailPixelSize:    256,
-		WebringUrl:            "",
+		Images: ConfigurationImages{
+			AutoResize:         true,
+			MaxPixelSize:       960,
+			ThumbnailPixelSize: 256,
+		},
+		WebringUrl: "",
 	}
 }
 

@@ -19,7 +19,7 @@ func NewMetadata(directoryPath string, publicDirectoryPath string, filePath stri
 	publicFilePath := filepath.Join(publicDirectoryPath, base)
 	ext := filepath.Ext(publicFilePath)
 	publicFilePathWithoutExt := strings.TrimSuffix(publicFilePath, ext)
-	publicThumbnailPath := publicFilePathWithoutExt + ".thumbnail.jpeg"
+	publicThumbnailPath := publicFilePathWithoutExt + ".thumbnail.png"
 	publicHtmlPath := publicFilePathWithoutExt + ".html"
 
 	return &Metadata{

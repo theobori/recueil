@@ -30,6 +30,8 @@
               go
               golangci-lint
               http-server
+              pkg-config
+              vips
             ];
           };
         };

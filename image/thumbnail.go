@@ -2,67 +2,65 @@ package image
 
 import (
 	"fmt"
-	"image"
-	"image/jpeg"
-	"image/png"
-	"os"
 	"path/filepath"
 
-	_ "image/gif"
-	_ "image/jpeg"
-	_ "image/png"
-
-	"golang.org/x/image/draw"
+	"github.com/h2non/bimg"
 )
-
-type SubImager interface {
-	SubImage(r image.Rectangle) image.Image
-}
 
 func CreateThumbnail(imagePath string, thumbnailPath string, thumbnailSize int) error {
 	if thumbnailSize <= 0 {
 		return fmt.Errorf("The width must be greater than zero.")
 	}
 
-	f, err := os.Open(imagePath)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-
-	imgSource, _, err := image.Decode(f)
+	buffer, err := bimg.Read(imagePath)
 	if err != nil {
 		return err
 	}
 
-	rectSource := imgSource.Bounds()
-	rectSize := rectSource.Size()
-
-	size := min(rectSize.X, rectSize.Y)
-	midX := rectSize.X / 2
-	midY := rectSize.Y / 2
-	r := image.Rect(midX-(size/2), midY-(size/2), midX+(size/2), midY+(size/2))
-
-	imgSquare := imgSource.(SubImager).SubImage(r)
-	fw, err := os.Create(thumbnailPath)
+	imgSource := bimg.NewImage(buffer)
+	size, err := imgSource.Size()
 	if err != nil {
 		return err
 	}
-	defer fw.Close()
 
-	imgDestination := image.NewRGBA(image.Rect(0, 0, thumbnailSize, thumbnailSize))
+	newSize := min(size.Width, size.Height)
+	midX := size.Width / 2
+	midY := size.Height / 2
+	bufExtracted, err := imgSource.Extract(midY-(newSize/2), midX-(newSize/2), newSize, newSize)
+	if err != nil {
+		return err
+	}
 
-	draw.NearestNeighbor.Scale(imgDestination, imgDestination.Rect, imgSquare, imgSquare.Bounds(), draw.Over, nil)
+	bufResize, err := bimg.Resize(bufExtracted, bimg.Options{Width: thumbnailSize, Height: thumbnailSize})
+	if err != nil {
+		return err
+	}
 
-	imagePathExt := filepath.Ext(imagePath)
+	imagePathExt := filepath.Ext(thumbnailPath)
+	img := bimg.NewImage(bufResize)
+
+	var buf []byte
 	switch imagePathExt {
 	case ".jpeg":
-		err = jpeg.Encode(fw, imgDestination, nil)
+		buf, err = img.Convert(bimg.JPEG)
 	case ".png":
-		err = png.Encode(fw, imgDestination)
+		buf, err = img.Convert(bimg.PNG)
 	default:
 		return fmt.Errorf("The image format associated to the file ext '%s' is not handled.", imagePathExt)
 	}
+	if err != nil {
+		return err
+	}
+
+	buf, err = bimg.NewImage(buf).Process(bimg.Options{
+		Lossless:    true,
+		Compression: 9,
+	})
+	if err != nil {
+		return err
+	}
+
+	err = bimg.Write(thumbnailPath, buf)
 	if err != nil {
 		return err
 	}
