@@ -28,6 +28,10 @@
                         {{.Metadata.Description}}
                     </figcaption>
                 </div>
+                <div id="recueil-tags">{{range .Metadata.Tags}}
+                    <a href="{{$.TagsDirectory}}/{{.}}.html">{{.}}</a>{{else}}
+                    <div></div>{{end}}
+                </div>
             </figure>
         </main>
         <footer>
