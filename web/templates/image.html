@@ -25,12 +25,11 @@
                         <b>{{.Metadata.Date.Format "2006-01-02 15:04:05"}}</b>
                     </div>
                     <figcaption>
-                        {{.Metadata.Description}}
+                        <i>{{.Metadata.Description}}</i>
                     </figcaption>
                 </div>
                 <div id="recueil-tags">{{range .Metadata.Tags}}
-                    <a href="{{$.TagsDirectory}}/{{.}}.html">{{.}}</a>{{else}}
-                    <div></div>{{end}}
+                    <a href="{{$.TagsDirectory}}/{{.}}.html">{{.}}</a>{{else}}{{end}}
                 </div>
             </figure>
         </main>

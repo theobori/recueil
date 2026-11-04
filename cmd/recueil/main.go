@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
+	"sync"
 
 	"github.com/theobori/recueil/configuration"
 	"github.com/theobori/recueil/image"
@@ -64,31 +65,37 @@ func main() {
 	sort.Sort(sort.Reverse(metadatas))
 
 	log.Printf("Copying images and creating the associated thumbnails.\n")
-	for _, metadata := range metadatas {
-		var err error
-		if config.Images.AutoResize {
-			if verbose {
-				log.Printf("Resizing from '%s' to '%s'.\n", metadata.Source.ImagePath.Value, metadata.Destination.ImagePath.Value)
-			}
-			err = image.ResizeIfGtMaxPixelSize(metadata.Source.ImagePath.Value, metadata.Destination.ImagePath.Value, config.Images.MaxPixelSize)
-		} else {
-			if verbose {
-				log.Printf("Copying from '%s' to '%s'.\n", metadata.Source.ImagePath.Value, metadata.Destination.ImagePath.Value)
-			}
-			err = internal.CopyFile(metadata.Source.ImagePath.Value, metadata.Destination.ImagePath.Value)
-		}
-		if err != nil {
-			log.Fatalln(err)
-		}
+	var wg sync.WaitGroup
 
-		if verbose {
-			log.Printf("Creating the thumbnail at '%s'.\n", metadata.Destination.ThumbnailPath.Value)
-		}
-		err = image.CreateThumbnail(metadata.Source.ImagePath.Value, metadata.Destination.ThumbnailPath.Value, config.Images.ThumbnailPixelSize)
-		if err != nil {
-			log.Fatalln(err)
-		}
+	for _, metadata := range metadatas {
+		wg.Go(func() {
+			var err error
+			if config.Images.AutoResize {
+				if verbose {
+					log.Printf("Resizing from '%s' to '%s'.\n", metadata.Source.ImagePath.Value, metadata.Destination.ImagePath.Value)
+				}
+				err = image.ResizeIfGtMaxPixelSize(metadata.Source.ImagePath.Value, metadata.Destination.ImagePath.Value, config.Images.MaxPixelSize)
+			} else {
+				if verbose {
+					log.Printf("Copying from '%s' to '%s'.\n", metadata.Source.ImagePath.Value, metadata.Destination.ImagePath.Value)
+				}
+				err = internal.CopyFile(metadata.Source.ImagePath.Value, metadata.Destination.ImagePath.Value)
+			}
+			if err != nil {
+				log.Fatalln(err)
+			}
+
+			if verbose {
+				log.Printf("Creating the thumbnail at '%s'.\n", metadata.Destination.ThumbnailPath.Value)
+			}
+			err = image.CreateThumbnail(metadata.Source.ImagePath.Value, metadata.Destination.ThumbnailPath.Value, config.Images.ThumbnailPixelSize)
+			if err != nil {
+				log.Fatalln(err)
+			}
+		})
 	}
+
+	wg.Wait()
 
 	log.Printf("Copying the files from '%s' into '%s'.\n", config.PublicSourceDirectory, destinationDirectory)
 	err = internal.CopyDir(destinationDirectory, config.PublicSourceDirectory)
