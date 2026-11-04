@@ -65,10 +65,18 @@ func main() {
 
 	log.Printf("Copying images and creating the associated thumbnails.\n")
 	for _, metadata := range metadatas {
-		if verbose {
-			log.Printf("Copying from '%s' to '%s'.\n", metadata.Source.ImagePath.Value, metadata.Destination.ImagePath.Value)
+		var err error
+		if config.Images.AutoResize {
+			if verbose {
+				log.Printf("Resizing from '%s' to '%s'.\n", metadata.Source.ImagePath.Value, metadata.Destination.ImagePath.Value)
+			}
+			err = image.ResizeIfGtMaxPixelSize(metadata.Source.ImagePath.Value, metadata.Destination.ImagePath.Value, config.Images.MaxPixelSize)
+		} else {
+			if verbose {
+				log.Printf("Copying from '%s' to '%s'.\n", metadata.Source.ImagePath.Value, metadata.Destination.ImagePath.Value)
+			}
+			err = internal.CopyFile(metadata.Source.ImagePath.Value, metadata.Destination.ImagePath.Value)
 		}
-		err := internal.CopyFile(metadata.Source.ImagePath.Value, metadata.Destination.ImagePath.Value)
 		if err != nil {
 			log.Fatalln(err)
 		}

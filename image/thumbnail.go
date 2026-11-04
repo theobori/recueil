@@ -12,12 +12,12 @@ func CreateThumbnail(imagePath string, thumbnailPath string, thumbnailSize int) 
 		return fmt.Errorf("The width must be greater than zero.")
 	}
 
-	buffer, err := bimg.Read(imagePath)
+	buf, err := bimg.Read(imagePath)
 	if err != nil {
 		return err
 	}
 
-	imgSource := bimg.NewImage(buffer)
+	imgSource := bimg.NewImage(buf)
 	size, err := imgSource.Size()
 	if err != nil {
 		return err
@@ -39,7 +39,6 @@ func CreateThumbnail(imagePath string, thumbnailPath string, thumbnailSize int) 
 	imagePathExt := filepath.Ext(thumbnailPath)
 	img := bimg.NewImage(bufResize)
 
-	var buf []byte
 	switch imagePathExt {
 	case ".jpeg":
 		buf, err = img.Convert(bimg.JPEG)
