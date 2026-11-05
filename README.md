@@ -63,11 +63,38 @@ The table below summarizes the YAML configuration specifications.
 | `images.maxPixelSize` | The images max pixel size. If images.autoResize is set to true, it will resize images with a width or a height greater than this value. | Integer | `960` |
 | `images.autoResize` | Enable the images autoresize feature. | Boolean | `true` |
 | `thumbnailPixelSize` | The thumbnails size, used for width and height. | Integer | `256` |
-| `webringUrl` | A single webring URL (It should probably be a list). | String | `"https://my-webring.com"` |
+| `webringUrl` | A single webring URL (It should probably be a list). | String | `""` |
+
+Below is a YAML configuration with all these fields populated with their default values.
+
+```yaml
+baseDirectory: "/recueil"
+title: "my recueil"
+css:
+  colorBg: "#fffef7"
+  colorFg: "#394655"
+  colorLink: "brown"
+  colorHover: "brown"
+siteUrl: "http://localhost:8080"
+publicSourceDirectory: "./public"
+images:
+  maxPixelSize: 960
+  autoResize: true
+thumbnailPixelSize: 256
+webringUrl: ""
+```
 
 ### RSS feed
 
 The project generates an XML file containing an RSS feed that complies with the standards described by the [Ocular Webring](https://codeberg.org/rostiger/ocular_webring).
+
+## Example
+
+You'll find a sample project for a collection in the [example](./example/) folder.
+
+## Live Demo
+
+You can find an example of a static gallery built with the tool and deployed at https://recueil-demo.theobori.cafe.
 
 ## Contribute
 

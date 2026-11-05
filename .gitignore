@@ -34,7 +34,7 @@ go.work.sum
 result
 .direnv
 /recueil
-example
+my-example
 recueil-static
 example.yaml
-public
+/public

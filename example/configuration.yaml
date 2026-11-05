@@ -1,0 +1,14 @@
+baseDirectory: "/recueil"
+title: "recueil demo"
+css:
+  colorBg: "#fffef7"
+  colorFg: "#394655"
+  colorLink: "brown"
+  colorHover: "brown"
+siteUrl: "https://recueil-demo.theobori.cafe"
+publicSourceDirectory: "./public"
+images:
+  maxPixelSize: 960
+  autoResize: true
+thumbnailPixelSize: 256
+webringUrl: ""

@@ -32,6 +32,7 @@
               http-server
               pkg-config
               vips
+              exiftool
             ];
           };
         };
