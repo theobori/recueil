@@ -97,15 +97,15 @@ func main() {
 
 	wg.Wait()
 
-	log.Printf("Copying the files from '%s' into '%s'.\n", config.PublicSourceDirectory, destinationDirectory)
-	err = internal.CopyDir(destinationDirectory, config.PublicSourceDirectory)
+	log.Printf("Evaluating then creating the web files.\n")
+	webExecutor := web.NewExecutor(destinationDirectory, metadatas, config, verbose)
+	err = webExecutor.Execute()
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	log.Printf("Evaluating then creating the web files.\n")
-	webExecutor := web.NewExecutor(destinationDirectory, metadatas, config, verbose)
-	err = webExecutor.Execute()
+	log.Printf("Copying the files from '%s' into '%s'.\n", config.PublicSourceDirectory, destinationDirectory)
+	err = internal.CopyDir(destinationDirectory, config.PublicSourceDirectory)
 	if err != nil {
 		log.Fatalln(err)
 	}

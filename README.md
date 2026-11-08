@@ -88,6 +88,10 @@ webringUrl: ""
 
 The project generates an XML file containing an RSS feed that complies with the standards described by the [Ocular Webring](https://codeberg.org/rostiger/ocular_webring).
 
+## Customization
+
+If you want to customize the style of the web pages, I think the easiest way is to override the `gallery.css` and `image.css` files in the root directory of the built website. To do this, you can create files with the same names in your public source folder; its path is specified in the YAML configuration via the `publicSourceDirectory` field.
+
 ## Example
 
 You'll find a sample project for a collection in the [example](./example/) folder.

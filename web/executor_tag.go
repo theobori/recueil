@@ -6,7 +6,7 @@ import (
 	"github.com/theobori/recueil/image"
 )
 
-type TagHtmlData HomeHtmlData
+type TagHtmlData GalleryHtmlData
 
 func (e *Executor) executeTag(tagName string, boundMetadatas []*image.Metadata) error {
 	return e.executeHelper(
@@ -18,7 +18,7 @@ func (e *Executor) executeTag(tagName string, boundMetadatas []*image.Metadata) 
 			TagsDirectory: e.config.TagsDirectory,
 			WebringUrl:    e.config.WebringUrl,
 		},
-		"templates/home.html",
+		"templates/gallery.html",
 	)
 }
 
