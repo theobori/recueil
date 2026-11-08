@@ -29,12 +29,19 @@ func CreateRss(metadatas image.Metadatas, title string, siteUrl string) string {
 
 		metadataUrl := internal.UrlJoin(siteUrl, metadata.Destination.ImagePath.PublicValue)
 		fmt.Fprintf(&b, "<link>%s</link>", metadataUrl)
+		metadataDescription := metadata.Description()
+		var altAttr string
+		if len(metadataDescription) > 0 {
+			altAttr = fmt.Sprintf(" alt=\"%s\"", metadataDescription)
+		} else {
+			altAttr = ""
+		}
 		fmt.Fprintf(
 			&b,
-			"<description><![CDATA[<img src=\"%s\" data-thumb=\"%s\" alt=\"%s\">]]></description>",
+			"<description><![CDATA[<img src=\"%s\" data-thumb=\"%s\"%s>]]></description>",
 			metadataUrl,
 			internal.UrlJoin(siteUrl, metadata.Destination.ThumbnailPath.PublicValue),
-			metadata.Description(),
+			altAttr,
 		)
 		fmt.Fprintf(&b, "<pubDate>%s</pubDate>", metadata.Date().UTC().Format(time.RFC1123Z))
 		b.WriteString("</item>")
