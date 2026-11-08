@@ -6,7 +6,7 @@
 
 The name of the project is "recueil", pronounced \\ʁə.kœj\\.
 
-This GitHub repository is a [KISS](https://en.wikipedia.org/wiki/KISS_principle) project that contains a CLI wrote in the Go language. The goal of this CLI is to build an image gallery in the form of a simple, minimalist static website without JavaScript. This project is directly inspired by [Ocular](https://codeberg.org/rostiger/ocular/) and [img.corvid.cafe](https://img.corvid.cafe/).
+This GitHub repository is a [KISS](https://en.wikipedia.org/wiki/KISS_principle) project that contains a CLI wrote in the Go language. The goal of this CLI is to build an image gallery in the form of a simple, minimalist static website without JavaScript. It is also used to add and remove image files from the source folder. This project is directly inspired by [Ocular](https://codeberg.org/rostiger/ocular/) and [img.corvid.cafe](https://img.corvid.cafe/).
 
 ## Getting started
 
@@ -95,6 +95,69 @@ The project generates an XML file containing an RSS feed that complies with the 
 ## Customization
 
 If you want to customize the style of the web pages, I think the easiest way is to override the `gallery.css` and `image.css` files in the root directory of the built website. To do this, you can create files with the same names in your public source folder, its path is specified in the YAML configuration via the `publicSourceDirectory` field.
+
+## CLI
+
+The tool's commands are described in this section.
+
+### `help`
+
+This command displays the help message.
+
+### `build`
+
+Build the static gallery web site.
+
+```text
+usage: recueil build [<flags>]
+
+Build the static gallery web site.
+
+
+Flags:
+  --[no-]help         Show context-sensitive help (also try --help-long and --help-man).
+  --source-directory="./recueil"
+                      The source directory which should be your 'recueil' base directory.
+  --destination-directory="./recueil-static"
+                      The destination directory where files are installed.
+  --configuration=""  The configuration YAML file path.
+  --[no-]verbose      Enable verbose.
+```
+
+### `add`
+
+The purpose of this command is to copy an image to the source image folder and to facilitate the creation of the associated YAML metadata file.
+
+```text
+usage: recueil add <image> <directory>
+
+Add a new image.
+
+
+Flags:
+  --[no-]help  Show context-sensitive help (also try --help-long and --help-man).
+
+Args:
+  <image>      Image file path.
+  <directory>  Image directory.
+```
+
+### `delete`
+
+This command is used to delete a source image file and the associated metadata file, if it exists.
+
+```text
+usage: recueil delete <image>
+
+Delete image.
+
+
+Flags:
+  --[no-]help  Show context-sensitive help (also try --help-long and --help-man).
+
+Args:
+  <image>  Image file path.
+```
 
 ## Example
 

@@ -7,7 +7,7 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-func YamlUnmarshalFromPath(yamlPath string, out any) error {
+func TryYamlUnmarshalFromPath(yamlPath string, out any) error {
 	f, err := os.Open(yamlPath)
 	if err == nil {
 		defer f.Close()

@@ -57,7 +57,7 @@ func NewConfigurationDefault() *Configuration {
 func NewConfigurationFromPath(yamlPath string) (*Configuration, error) {
 	configuration := NewConfigurationDefault()
 
-	err := internal.YamlUnmarshalFromPath(yamlPath, configuration)
+	err := internal.TryYamlUnmarshalFromPath(yamlPath, configuration)
 	if err != nil {
 		return nil, err
 	}

@@ -11,11 +11,11 @@ import (
 )
 
 type Metadata struct {
-	Title       string   `yaml:"title"`
-	Description string   `yaml:"description"`
-	Tags        []string `yaml:"tags"`
-	Date        time.Time
-	ImagePath   *rpath.Path
+	Title       string      `yaml:"title"`
+	Description string      `yaml:"description"`
+	Tags        []string    `yaml:"tags"`
+	Date        time.Time   `yaml:"date"`
+	ImagePath   *rpath.Path `yaml:"-"`
 }
 
 func NewMetadataFromPath(path string) (*Metadata, error) {
@@ -31,7 +31,7 @@ func NewMetadataFromPath(path string) (*Metadata, error) {
 
 	yamlPath := strings.TrimSuffix(path, ".") + ".yaml"
 
-	err = internal.YamlUnmarshalFromPath(yamlPath, &metadata)
+	err = internal.TryYamlUnmarshalFromPath(yamlPath, &metadata)
 	if err != nil {
 		return nil, err
 	}

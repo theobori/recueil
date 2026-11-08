@@ -25,11 +25,11 @@ jobs:
       - run: nix flake check
       - run: |
           cd ./example
-          nix run .# -- \
-            -configuration "./configuration.yaml" \
-            -source-directory "./images" \
-            -destination-directory "../recueil-demo" \
-            -verbose
+          nix run .# -- build \
+            --configuration "./configuration.yaml" \
+            --source-directory "./images" \
+            --destination-directory "../recueil-demo" \
+            --verbose
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
