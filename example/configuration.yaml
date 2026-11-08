@@ -5,6 +5,8 @@ css:
   colorFg: "#394655"
   colorLink: "brown"
   colorHover: "brown"
+  colorSelectionFg: "#fffef7"
+  colorSelectionBg: "brown"
 siteUrl: "https://recueil-demo.theobori.cafe"
 publicSourceDirectory: "./public"
 images:
