@@ -13,10 +13,12 @@ type ImageHtmlData struct {
 }
 
 type ImageCssData struct {
-	ColorBg    string
-	ColorFg    string
-	ColorLink  string
-	ColorHover string
+	ColorBg          string
+	ColorFg          string
+	ColorLink        string
+	ColorHover       string
+	ColorSelectionFg string
+	ColorSelectionBg string
 }
 
 func (e *Executor) executeImages() error {
@@ -50,10 +52,12 @@ func (e *Executor) executeImages() error {
 	err := e.executeHelper(
 		"image.css",
 		&ImageCssData{
-			ColorBg:    e.config.Css.ColorBg,
-			ColorFg:    e.config.Css.ColorFg,
-			ColorLink:  e.config.Css.ColorLink,
-			ColorHover: e.config.Css.ColorHover,
+			ColorBg:          e.config.Css.ColorBg,
+			ColorFg:          e.config.Css.ColorFg,
+			ColorLink:        e.config.Css.ColorLink,
+			ColorHover:       e.config.Css.ColorHover,
+			ColorSelectionFg: e.config.Css.ColorSelectionFg,
+			ColorSelectionBg: e.config.Css.ColorSelectionBg,
 		},
 		"templates/image.css",
 	)

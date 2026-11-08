@@ -82,6 +82,10 @@ func (e *Executor) executeHelper(path string, data any, patterns ...string) erro
 func (e *Executor) Execute() error {
 	var err error
 
+	err = e.executeGallery()
+	if err != nil {
+		return err
+	}
 	err = e.executeHome()
 	if err != nil {
 		return err

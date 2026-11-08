@@ -1,43 +1,43 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>{{.Metadata.Title}}</title>
-        <link rel="stylesheet" type="text/css" href="/image.css">
-	</head>
-	<body>
-        <header>
-            <nav>
-                <h1>{{ .Metadata.Title }}</h1>
-            </nav>
-        </header>
-        <main>
-            <div id="recueil-switch">
-                {{ if .PreviousMetadata }}<a id="recueil-switch-previous" href="{{.PreviousMetadata.Destination.HtmlPath.PublicValue}}">Previous</a>{{end}}
-                {{ if .NextMetadata }}<a id="recueil-switch-next" href="{{.NextMetadata.Destination.HtmlPath.PublicValue}}">Next</a>{{end}}
-            </div>
-            <figure>
-                <a id="{{ .Metadata.Title }}" href="{{ .Metadata.Destination.ImagePath.PublicValue }}">
-                    <img id="{{ .Metadata.Title }}" title=" {{ .Metadata.Description }}" alt=" {{ .Metadata.Description }}" src="{{ .Metadata.Destination.ImagePath.PublicValue }}" loading="lazy">
-                </a>
-                <div id="recueil-figure-metadata">
-                    <div>
-                        <b>{{.Metadata.Date.Format "2006-01-02 15:04:05"}}</b>
-                    </div>
-                    <figcaption>
-                        <i>{{.Metadata.Description}}</i>
-                    </figcaption>
-                </div>
-                <div id="recueil-tags">{{range .Metadata.Tags}}
-                    <a href="{{$.TagsDirectory}}/{{.}}.html">{{.}}</a>{{else}}{{end}}
-                </div>
-            </figure>
-        </main>
-        <footer>
-            <a href="#">top</a>
-            <a href="/">home</a>
-            <a href="/rss.xml">rss</a>
-            {{ if .WebringUrl }}<a href="{{ .WebringUrl }}">webring</a>{{end}}
-        </footer>
-    </body>
+  <head>
+    <meta charset="UTF-8">
+    <title>{{.Metadata.Title}}</title>
+    <link rel="stylesheet" type="text/css" href="/image.css">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h1>{{ .Metadata.Title }}</h1>
+      </nav>
+    </header>
+    <main>
+      <div id="recueil-switch">
+        {{ if .PreviousMetadata }}<a id="recueil-switch-previous" href="{{.PreviousMetadata.Destination.HtmlPath.PublicValue}}">Previous</a>{{end}}
+        {{ if .NextMetadata }}<a id="recueil-switch-next" href="{{.NextMetadata.Destination.HtmlPath.PublicValue}}">Next</a>{{end}}
+      </div>
+      <figure>
+        <a id="{{ .Metadata.Title }}" href="{{ .Metadata.Destination.ImagePath.PublicValue }}">
+          <img id="{{ .Metadata.Title }}" title=" {{ .Metadata.Description }}" alt=" {{ .Metadata.Description }}" src="{{ .Metadata.Destination.ImagePath.PublicValue }}" loading="lazy">
+        </a>
+        <div id="recueil-figure-metadata">
+          <div>
+            <b>{{.Metadata.Date.Format "2006-01-02 15:04:05"}}</b>
+          </div>
+          <figcaption>
+            <i>{{.Metadata.Description}}</i>
+          </figcaption>
+        </div>
+        <div id="recueil-tags">{{range .Metadata.Tags}}
+          <a href="{{$.TagsDirectory}}/{{.}}.html">{{.}}</a>{{else}}{{end}}
+        </div>
+      </figure>
+    </main>
+    <footer>
+      <a href="#">top</a>
+      <a href="/">home</a>
+      <a href="/rss.xml">rss</a>
+      {{ if .WebringUrl }}<a href="{{ .WebringUrl }}">webring</a>{{end}}
+    </footer>
+  </body>
 </html>

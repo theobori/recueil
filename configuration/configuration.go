@@ -3,10 +3,12 @@ package configuration
 import "github.com/theobori/recueil/internal"
 
 type ConfigurationCss struct {
-	ColorBg    string `yaml:"colorBg"`
-	ColorFg    string `yaml:"colorFg"`
-	ColorLink  string `yaml:"colorLink"`
-	ColorHover string `yaml:"colorHover"`
+	ColorBg          string `yaml:"colorBg"`
+	ColorFg          string `yaml:"colorFg"`
+	ColorLink        string `yaml:"colorLink"`
+	ColorHover       string `yaml:"colorHover"`
+	ColorSelectionFg string `yaml:"colorSelectionFg"`
+	ColorSelectionBg string `yaml:"colorSelectionBg"`
 }
 
 type ConfigurationImages struct {
@@ -34,10 +36,12 @@ func NewConfigurationDefault() *Configuration {
 		TagsDirectory: "/tags",
 		Title:         "recueil",
 		Css: ConfigurationCss{
-			ColorBg:    "#fffef7",
-			ColorFg:    "#394655",
-			ColorLink:  "brown",
-			ColorHover: "brown",
+			ColorBg:          "#fffef7",
+			ColorFg:          "#394655",
+			ColorLink:        "brown",
+			ColorHover:       "brown",
+			ColorSelectionFg: "#fffef7",
+			ColorSelectionBg: "brown",
 		},
 		SiteUrl:               "http://localhost:8080",
 		PublicSourceDirectory: "./public",

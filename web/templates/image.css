@@ -1,8 +1,10 @@
 :root {
-  --color-bg: {{ .ColorBg }};
-  --color-fg: {{ .ColorFg }};
-  --color-link: {{ .ColorLink }};
-  --color-hover: {{ .ColorHover }};
+    --color-bg: {{ .ColorBg }};
+    --color-fg: {{ .ColorFg }};
+    --color-link: {{ .ColorLink }};
+    --color-hover: {{ .ColorHover }};
+    --color-selection-fg: {{ .ColorSelectionFg }};
+    --color-selection-bg: {{ .ColorSelectionBg }};
 }
 
 body {
@@ -11,7 +13,7 @@ body {
     max-width: 80ch;
     padding: 1em;
     margin: 1em auto;
-    font: 1.2rem sans-serif;
+    font-family: sans-serif;
 }
 
 main {
@@ -20,9 +22,9 @@ main {
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 header {
@@ -30,19 +32,25 @@ header {
 }
 
 img {
-  max-width: 100%;
+    max-width: 100%;
 }
 
 a {
     color: var(--color-link);
-}
-
-a:hover {
-    text-decoration:none;
+    text-decoration: none;
 }
 
 #recueil-figure-metadata {
     margin-top: 2em;
+    text-decoration: none;
+}
+
+#recueil-tags {
+    a:hover {
+	background-color: var(--color-link);
+	color: var(--color-bg);
+	text-decoration: none;
+    }
 }
 
 #recueil-switch {
@@ -77,4 +85,10 @@ footer {
     a {
         padding: .1em;
     }
+}
+
+::selection {
+    background: var(--color-selection-bg);
+    color: var(--color-selection-fg);
+    text-shadow: none;
 }

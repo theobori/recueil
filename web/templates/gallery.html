@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>{{.Title}}</title>
-        <link rel="stylesheet" type="text/css" href="/gallery.css">
-	</head>
-	<body>
-        <header>
-            <nav>
-                <h1>{{.Title}}</h1>
-            </nav>
-        </header>
-        <main>
-            <div id="recueil-tags">{{range .Tags}}
-                <a href="{{$.TagsDirectory}}/{{.}}.html">{{.}}</a>{{else}}
-                <div></div>{{end}}
-            </div>
-            <div id="recueil-thumbnails">{{range .Metadatas}}
-                <a id="{{ .Title }}" href="{{ .Destination.HtmlPath.PublicValue }}">
-                    <img id="{{ .Title }}" class="recueil-thumbnail"{{ if .Description }} title="{{ .Description }}"{{end}}{{ if .Description }} alt="{{ .Description }}"{{end}} src="{{ .Destination.ThumbnailPath.PublicValue }}" loading="lazy">
-                </a>{{else}}
-                <div><i>The recueil is empty.</i></div>{{end}}
-            </div>
-        </main>
-        <footer>
-            <a href="#">top</a>
-            <a href="/">home</a>
-            <a href="/rss.xml">rss</a>
-            {{ if .WebringUrl }}<a href="{{ .WebringUrl }}">webring</a>{{end}}
-        </footer>
-    </body>
+  <head>
+    <meta charset="UTF-8">
+    <title>{{.Title}}</title>
+    <link rel="stylesheet" type="text/css" href="/gallery.css">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h1>{{.Title}}</h1>
+      </nav>
+    </header>
+    <main>
+      <div id="recueil-tags">{{range .Tags}}
+        <a href="{{$.TagsDirectory}}/{{.}}.html">{{.}}</a>{{else}}
+        <div></div>{{end}}
+      </div>
+      <div id="recueil-thumbnails">{{range .Metadatas}}
+        <a id="{{ .Title }}" href="{{ .Destination.HtmlPath.PublicValue }}">
+          <img id="{{ .Title }}" class="recueil-thumbnail"{{ if .Description }} title="{{ .Description }}"{{end}}{{ if .Description }} alt="{{ .Description }}"{{end}} src="{{ .Destination.ThumbnailPath.PublicValue }}" loading="lazy">
+        </a>{{else}}
+        <div><i>The recueil is empty.</i></div>{{end}}
+      </div>
+    </main>
+    <footer>
+      <a href="#">top</a>
+      <a href="/">home</a>
+      <a href="/rss.xml">rss</a>
+      {{ if .WebringUrl }}<a href="{{ .WebringUrl }}">webring</a>{{end}}
+    </footer>
+  </body>
 </html>

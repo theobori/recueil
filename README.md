@@ -58,6 +58,8 @@ The table below summarizes the YAML configuration specifications.
 | `css.colorFg` | The website foreground color. | String | `"#394655"` |
 | `css.colorLink` | The website links color. | String | `"brown"` |
 | `css.colorHover` | The website hovers color. | String | `"brown"` |
+| `css.colorSelectionFg` | The website text selection color. | String | `"#fffef7"` |
+| `css.colorSelectionBg` | The website text selection background color. | String | `"brown"` |
 | `siteUrl` | The website URL. | String | `"http://localhost:8080"` |
 | `publicSourceDirectory` | The source public directory. The files inside will be available from the website root directory. As example, You can use it to add a favicon file. | String | `"./public"` |
 | `images.maxPixelSize` | The images max pixel size. If images.autoResize is set to true, it will resize images with a width or a height greater than this value. | Integer | `960` |
@@ -75,6 +77,8 @@ css:
   colorFg: "#394655"
   colorLink: "brown"
   colorHover: "brown"
+  colorSelectionFg: "#fffef7"
+  colorSelectionBg: "brown"
 siteUrl: "http://localhost:8080"
 publicSourceDirectory: "./public"
 images:

@@ -1,8 +1,10 @@
 :root {
-  --color-bg: {{ .ColorBg }};
-  --color-fg: {{ .ColorFg }};
-  --color-link: {{ .ColorLink }};
-  --color-hover: {{ .ColorHover }};
+    --color-bg: {{ .ColorBg }};
+    --color-fg: {{ .ColorFg }};
+    --color-link: {{ .ColorLink }};
+    --color-hover: {{ .ColorHover }};
+    --color-selection-fg: {{ .ColorSelectionFg }};
+    --color-selection-bg: {{ .ColorSelectionBg }};
 }
 
 body {
@@ -11,7 +13,7 @@ body {
     max-width: 80ch;
     padding: 1em;
     margin: 1em auto;
-    font: 1.2rem sans-serif;
+    font-family: sans-serif;
 }
 
 main {
@@ -20,9 +22,9 @@ main {
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 header {
@@ -30,21 +32,23 @@ header {
 }
 
 img {
-  max-width: 100%;
+    max-width: 100%;
 }
 
 a {
     color: var(--color-link);
 }
 
-a:hover {
-    text-decoration:none;
-}
-
 #recueil-tags {
     margin-left: -.1em;
     a {
         padding: .1em;
+	text-decoration: none;
+    }
+    a:hover {
+	background-color: var(--color-link);
+	color: var(--color-bg);
+	text-decoration: none;
     }
 }
 .recueil-thumbnail {
@@ -52,18 +56,18 @@ a:hover {
     max-width: {{ .ThumbnailPixelSize }}px;
     aspect-ratio: 1/1;
     object-fit: cover;
-    object-position: center; 
+    object-position: center;
 }
 
 #recueil-thumbnails {
-	margin:1em 0 0 -.2em;
-	width: 100%;
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-	a {
+    margin:1em 0 0 -.2em;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    a {
         padding:.2em;
     }
-	a, img {
+    a, img {
         display: block;
         object-fit: cover;
         width: 100%;
@@ -79,5 +83,12 @@ footer {
     text-align: center;
     a {
         padding: .1em;
+	text-decoration: none;
     }
+}
+
+::selection {
+    background: var(--color-selection-bg);
+    color: var(--color-selection-fg);
+    text-shadow: none;
 }
