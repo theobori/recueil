@@ -1,6 +1,6 @@
 # My opinionated static gallery generator
 
-[![build badge](https://github.com/theobori/recueil/actions/workflows/build.yml/badge.svg)](https://github.com/theobori/recueil/actions/workflows/build.yml)
+[![build badge](https://github.com/theobori/recueil/actions/workflows/deploy.yml/badge.svg)](https://github.com/theobori/recueil/actions/workflows/build.yml)
 
 [![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
 
@@ -94,7 +94,7 @@ The project generates an XML file containing an RSS feed that complies with the 
 
 ## Customization
 
-If you want to customize the style of the web pages, I think the easiest way is to override the `gallery.css` and `image.css` files in the root directory of the built website. To do this, you can create files with the same names in your public source folder; its path is specified in the YAML configuration via the `publicSourceDirectory` field.
+If you want to customize the style of the web pages, I think the easiest way is to override the `gallery.css` and `image.css` files in the root directory of the built website. To do this, you can create files with the same names in your public source folder, its path is specified in the YAML configuration via the `publicSourceDirectory` field.
 
 ## Example
 

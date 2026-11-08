@@ -1,4 +1,4 @@
-name: Nix Flake Check And Build
+name: Build then deploy
 
 on:
   push:
@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -23,7 +23,7 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - run: nix flake check
-      - run: | 
+      - run: |
           cd ./example
           nix run .# -- \
             -configuration "./configuration.yaml" \
