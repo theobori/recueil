@@ -17,6 +17,11 @@ type ConfigurationImages struct {
 	ThumbnailPixelSize int  `yaml:"thumbnailPixelSize"`
 }
 
+type Webring struct {
+	Title string `yaml:"title"`
+	Url   string `yaml:"url"`
+}
+
 type Configuration struct {
 	// This value define the destination directory within the base destination directory
 	BaseDirectory         string              `yaml:"baseDirectory"`
@@ -26,8 +31,8 @@ type Configuration struct {
 	SiteUrl               string              `yaml:"siteUrl"`
 	Css                   ConfigurationCss    `yaml:"css"`
 	PublicSourceDirectory string              `yaml:"publicSourceDirectory"`
-	WebringUrl            string              `yaml:"webringUrl"`
 	Images                ConfigurationImages `yaml:"images"`
+	Webrings              []Webring           `yaml:"webrings"`
 }
 
 func NewConfigurationDefault() *Configuration {
@@ -50,7 +55,7 @@ func NewConfigurationDefault() *Configuration {
 			MaxPixelSize:       960,
 			ThumbnailPixelSize: 256,
 		},
-		WebringUrl: "",
+		Webrings: []Webring{},
 	}
 }
 

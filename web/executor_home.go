@@ -8,7 +8,7 @@ func (e *Executor) executeHome() error {
 		Title:         e.config.Title,
 		Tags:          e.tags,
 		TagsDirectory: e.config.TagsDirectory,
-		WebringUrl:    e.config.WebringUrl,
+		Webrings:      e.config.Webrings,
 	}
 	err := e.executeHelper("index.html", &homeHtmlData, "templates/gallery.html")
 	if err != nil {

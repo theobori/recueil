@@ -16,7 +16,7 @@ func (e *Executor) executeTag(tagName string, boundMetadatas []*image.Metadata) 
 			Title:         tagName,
 			Tags:          e.tags,
 			TagsDirectory: e.config.TagsDirectory,
-			WebringUrl:    e.config.WebringUrl,
+			Webrings:      e.config.Webrings,
 		},
 		"templates/gallery.html",
 	)

@@ -36,8 +36,8 @@
     <footer>
       <a href="#">top</a>
       <a href="/">home</a>
-      <a href="/rss.xml">rss</a>
-      {{ if .WebringUrl }}<a href="{{ .WebringUrl }}">webring</a>{{end}}
+      <a href="/rss.xml">rss</a>{{ range .Webrings }}
+      <a href="{{ .Url }}">{{ .Title }}</a>{{else}}{{end}}
     </footer>
   </body>
 </html>

@@ -65,7 +65,8 @@ The table below summarizes the YAML configuration specifications.
 | `images.maxPixelSize` | The images max pixel size. If images.autoResize is set to true, it will resize images with a width or a height greater than this value. | Integer | `960` |
 | `images.autoResize` | Enable the images autoresize feature. | Boolean | `true` |
 | `thumbnailPixelSize` | The thumbnails size, used for width and height. | Integer | `256` |
-| `webringUrl` | A single webring URL (It should probably be a list). | String | `""` |
+| `webrings[].title` | A webring title. | String | `""` |
+| `webrings[].url` | A webring URL. | String | `""` |
 
 Below is a YAML configuration with all these fields populated with their default values.
 
@@ -85,7 +86,9 @@ images:
   maxPixelSize: 960
   autoResize: true
 thumbnailPixelSize: 256
-webringUrl: ""
+webrings:
+  - title: "webring"
+    url: "https://webring.com"
 ```
 
 ### RSS feed

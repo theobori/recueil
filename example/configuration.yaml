@@ -13,4 +13,6 @@ images:
   maxPixelSize: 960
   autoResize: true
 thumbnailPixelSize: 256
-webringUrl: ""
+webrings:
+  - title: "webring"
+    url: "https://webring.com"

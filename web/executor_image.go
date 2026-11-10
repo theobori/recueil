@@ -1,6 +1,7 @@
 package web
 
 import (
+	"github.com/theobori/recueil/configuration"
 	"github.com/theobori/recueil/image"
 )
 
@@ -9,7 +10,7 @@ type ImageHtmlData struct {
 	PreviousMetadata *image.Metadata
 	NextMetadata     *image.Metadata
 	TagsDirectory    string
-	WebringUrl       string
+	Webrings         []configuration.Webring
 }
 
 type ImageCssData struct {
@@ -37,7 +38,7 @@ func (e *Executor) executeImages() error {
 			TagsDirectory:    e.config.TagsDirectory,
 			PreviousMetadata: previousMetadata,
 			NextMetadata:     nextMetadata,
-			WebringUrl:       e.config.WebringUrl,
+			Webrings:         e.config.Webrings,
 		}
 
 		err := e.executeHelper(metadata.Destination.HtmlPath.PublicValue, &imageHtmlData, "templates/image.html")
