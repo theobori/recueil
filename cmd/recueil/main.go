@@ -32,6 +32,7 @@ var (
 	add          = app.Command("add", "Add a new image.")
 	addImagePath = add.Arg("image", "Image file path.").Required().String()
 	addDirectory = add.Arg("directory", "Image directory.").Required().String()
+	addName      = add.Flag("name", "Destination file name.").Default("").String()
 
 	delete          = app.Command("delete", "Delete image.")
 	deleteImagePath = delete.Arg("image", "Image file path.").Required().String()
@@ -46,7 +47,7 @@ func Delete() error {
 
 	metadataDestinationPath := *deleteImagePath + ".yaml"
 	if _, err := os.Stat(metadataDestinationPath); err == nil {
-		log.Printf("Deleting the metadata file '%s'", *&metadataDestinationPath)
+		log.Printf("Deleting the metadata file '%s'", metadataDestinationPath)
 		err := os.Remove(metadataDestinationPath)
 		if err != nil {
 			return err
@@ -100,7 +101,14 @@ func Add() error {
 		Date:        fileInfo.ModTime(),
 	}
 
-	imageDestinationPath := filepath.Join(*addDirectory, filepath.Base(*addImagePath))
+	var destinationName string
+	if *addName != "" {
+		destinationName = *addName
+	} else {
+		destinationName = filepath.Base(*addImagePath)
+	}
+
+	imageDestinationPath := filepath.Join(*addDirectory, destinationName)
 	log.Printf("Copying the file from '%s' to '%s'", *addImagePath, imageDestinationPath)
 	err = internal.CopyFile(*addImagePath, imageDestinationPath)
 	if err != nil {

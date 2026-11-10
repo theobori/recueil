@@ -136,6 +136,7 @@ Add a new image.
 
 Flags:
   --[no-]help  Show context-sensitive help (also try --help-long and --help-man).
+  --name=""    Destination file name.
 
 Args:
   <image>      Image file path.
