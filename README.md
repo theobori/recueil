@@ -23,7 +23,7 @@ go install github.com/theobori/recueil/cmd/recueil
 To start using the tool, simply run the following command.
 
 ```bash
-recueil -help
+recueil help
 ```
 
 ## Specifications
@@ -52,7 +52,7 @@ The table below summarizes the YAML configuration specifications.
 
 | Field | Description | Field type | Default value |
 | - | - | - | - |
-| `baseDirectory` | The base directory within the destination directory. It contains every image and the associated HTML pages. | String | "/recueil" |
+| `baseDirectory` | The base directory within the destination directory. It contains every image and the associated HTML pages. | String | `"/recueil"` |
 | `title` | The website title. | String | `"My recueil"` |
 | `css.colorBg` | The website background color. | String | `"#fffef7"` |
 | `css.colorFg` | The website foreground color. | String | `"#394655"` |
