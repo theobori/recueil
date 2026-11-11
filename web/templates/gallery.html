@@ -12,9 +12,9 @@
       </nav>
     </header>
     <main>
-      <div id="recueil-tags">{{range .Tags}}
-        <a href="{{$.TagsDirectory}}/{{.}}.html">{{.}}</a>{{else}}
-        <div></div>{{end}}
+      <div id="recueil-tags">
+	<a href="/">/</a>{{range .Tags}}
+        <a href="{{$.TagsDirectory}}/{{.}}.html">{{.}}</a>{{else}}{{end}}
       </div>
       <div id="recueil-thumbnails">{{range .Metadatas}}
         <a id="{{ .Title }}" href="{{ .Destination.HtmlPath.PublicValue }}">
