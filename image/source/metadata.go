@@ -3,6 +3,7 @@ package source
 import (
 	"os"
 	"path/filepath"
+	"slices"
 	"strings"
 	"time"
 
@@ -39,6 +40,8 @@ func TransformTags(tags []string) []string {
 	for tag := range seen {
 		ans = append(ans, tag)
 	}
+
+	slices.Sort(ans)
 
 	return ans
 }

@@ -41,7 +41,7 @@ a {
 }
 
 #recueil-figure-metadata {
-    margin-top: 2em;
+    margin-top: 1em;
     text-decoration: none;
 }
 
@@ -55,6 +55,9 @@ a {
 
 #recueil-switch {
     display: block;
+    padding-bottom: 2em;
+    border-bottom: 1px dotted var(--color-fg);
+    margin-bottom: 1em;
 }
 
 #recueil-switch-previous {
@@ -80,8 +83,10 @@ img:hover {
 }
 
 footer {
-    margin-top: 3em;
-    text-align: center;
+    border-top: 1px dotted var(--color-fg);
+    padding-top: 0.8em;
+    margin-top: 1em;
+    text-align: right;
     a {
         padding: .1em;
     }

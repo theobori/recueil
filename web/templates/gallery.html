@@ -25,10 +25,10 @@
       </div>
     </main>
     <footer>
-      <a href="#">top</a>
-      <a href="/">home</a>
+      <a href="/">/</a>
       <a href="/rss.xml">rss</a>{{ range .Webrings }}
       <a href="{{ .Url }}">{{ .Title }}</a>{{else}}{{end}}
+      <a href="#">top</a>
     </footer>
   </body>
 </html>
