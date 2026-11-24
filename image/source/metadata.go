@@ -69,6 +69,8 @@ func NewMetadataFromPath(path string) (*Metadata, error) {
 	}
 
 	metadata.Tags = TransformTags(metadata.Tags)
+	metadata.Title = strings.TrimSpace(metadata.Title)
+	metadata.Description = strings.TrimSpace(metadata.Description)
 
 	return &metadata, nil
 }
